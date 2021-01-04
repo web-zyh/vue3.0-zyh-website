@@ -1,4 +1,4 @@
-import  { service } from '../utils/request'
+import  { service } from '../utils/http/request'
 import { RequestEnum } from '../config/httpEnum'
 import { LoginParams } from './types'
 
@@ -18,7 +18,7 @@ import { LoginParams } from './types'
 enum InterfaceUrl {
     LOGIN = '/Token/GenToken'
 }
-export function Login(params: LoginParams) {
+export function LOGIN(params: LoginParams) {
     return service.request({
      	url: InterfaceUrl.LOGIN,
         method: RequestEnum.POST,

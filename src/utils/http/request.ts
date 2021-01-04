@@ -1,7 +1,7 @@
 import Axios,{AxiosInstance} from 'axios'
 import { checkStatus } from './checkStatus'
-import { getToken } from './token'
-import { RequestEnum,ContentTypeEnum } from '../config/httpEnum'
+import { getToken } from '../auth/getToken'
+import { RequestEnum,ContentTypeEnum } from '../../config/httpEnum'
 import Qs from 'qs'
 
 // create axios
