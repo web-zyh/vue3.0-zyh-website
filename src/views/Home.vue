@@ -25,7 +25,7 @@
     ref, 
     toRefs
   } from 'vue';
-  import { LOGIN } from '../api/login';
+  import { LOGIN } from '@/api/user/login';
   import { useRouter } from 'vue-router';
   import { useStore } from 'vuex';
 
@@ -114,7 +114,7 @@
             try {
               let obj = {
                 username:'admin',
-                password:'admin!@#'
+                userpwd:'admin!@#'
               };
               const result = await LOGIN(obj);
               console.log(result,'result');

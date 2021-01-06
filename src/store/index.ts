@@ -3,7 +3,7 @@ import { setItem } from '../utils/storage/storage'
 
 export default createStore({ 
   state: {
-    token:'我是token值'
+    token:'token'
   },
   mutations: {
     commitTokenState(state,payload): void {

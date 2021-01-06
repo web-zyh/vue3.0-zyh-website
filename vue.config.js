@@ -1,4 +1,10 @@
 
+const path = require("path");
+
+const isProduction = process.env.NODE_ENV === 'production';// 是否为生产环境
+function resolve(dir) {
+    return path.join(__dirname, dir)
+}
 module.exports = {
     outputDir: 'dist',// 打包输出文件目录
     lintOnSave: false, //eslint-loader 是否开启eslint
@@ -15,5 +21,5 @@ module.exports = {
     // 第三方插件配置
     pluginOptions: {
      // ...
-    }
+    },
 }
