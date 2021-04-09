@@ -1,9 +1,10 @@
 <template>
   <div class="login">
     <div class="login-mask"></div>
-    <button @click="switchLanguage" style="position: absolute;right:0;top:0;">Switch language</button>
 
     <el-form :model="ruleForms" :rules="rules" ref="ruleForm" class="form">
+      <button @click="switchLanguage" style="position: absolute;right:10px;top:4px;">{{ state.language }}</button>
+
       <el-form-item prop="account">
         <el-input
           type="text"
@@ -29,14 +30,12 @@
           {{ $t('login.login') }}
         </el-button>
       </el-form-item>
-
     </el-form>
   </div>
 </template>
 <script>
 import { defineComponent, reactive } from "vue";
 import { LOGIN } from "@/mock/user/login";
-// import useI18n from "../../lang/i18n";
 import { useI18n } from "vue-i18n";
 import  { setItem }  from '../../utils/storage/storage';
 
@@ -48,9 +47,11 @@ export default defineComponent({
       const locale = i18n.locale.value === "cn" ? "en" : "cn";
       i18n.locale.value = locale;
       setItem('locale',locale);
+      state.language = locale;
     }; 
     let state = reactive({
       result_valid: false,
+      language:i18n.locale.value
     });
     let ruleForms = reactive({
       account: "admin",
@@ -76,6 +77,7 @@ export default defineComponent({
           };
           const result = await LOGIN(obj);
           console.log(result, "result");
+          this.$router.push("/about");
         } catch (e) {
           console.log(e);
         } finally {
