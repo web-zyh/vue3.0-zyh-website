@@ -1,9 +1,11 @@
 import { createStore } from 'vuex'
 import { setItem } from '../utils/storage/storage'
+import { getDevice } from '../utils/device';
 
 export default createStore({ 
   state: {
-    token:'token'
+    token:'token',
+    device:getDevice()
   },
   mutations: {
     commitTokenState(state,payload): void {

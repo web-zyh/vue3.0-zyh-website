@@ -1,13 +1,17 @@
 #setFooter {
   width: 100%;
-  background-color: #eee;
+  color:#fff;
+  background-image: url(../../assets/bg-footer.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
   & .footer {
     display: flex;
     justify-content: space-between;
     width: 100%;
     & .footer_link {
+      text-align: center;
       display: flex;
-      justify-content: space-between;
       width: 100%;
       border-bottom: 1px solid #ccc;
       padding: 3.63rem 0 2.56rem 0;
@@ -16,17 +20,20 @@
         & h3{
           font-size: 1.25rem;
           font-weight: 600;
-          color: #555;
+          color: #fff;
           line-height: 1.75rem;
           min-height: 3.8rem;
           margin: 0;
           padding: 0;
         }
         & a{
-          text-decoration: none;
+          color: #fff;
           font-size: .94rem;
           font-weight: 300;
           line-height: 1.88rem;
+        }
+        & a:hover{
+          color: #eb0080;
         }
       }
     }

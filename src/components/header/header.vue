@@ -1,26 +1,28 @@
 <template>
   <div id="setHeader">
-    <header class="header box-padding">
+    <header class="navigation box-padding">
       <div class="navigation__container">
         <div class="nav_left">
           <div class="nav_logo"></div>
         </div>
         <nav class="nav_right">
-          <template v-for="nav in state.navList" :key="nav.id">
+          <template v-for="nav in navList" :key="nav.id">
             <ul
-              :class="{ active: nav.id == state.nav_dynamic }"
-              @mousemove="navClick(nav.id)"
+              @mousemove="moveNav(nav.id)"
+              @mouseleave="leaveNav"
               class="nav_menu_list"
             >
-              <li>
-                <a
-                  style="display: inline-block; height: 100%"
-                  :href="nav.href"
-                  >{{ nav.name }}</a
-                >
+              <li :class="{ active: nav.id == is_open }"> 
+                <a class="nav_menu_list_link" :href="nav.href">{{ $t(`nav.${nav.title}`) }}</a>
+                <ul v-if="nav.id == is_open" class="menu_chidren">
+                  <li class="menu_chidren_item" v-for="(item,idx) in nav.children" :key="idx">
+                    <a class="menu_chidren_item_link" target="_blank" :href="item.link">{{ item.label }}</a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </template>
+          <span style="margin-top: 1.25rem;cursor: pointer;" @click="switchLanguage">{{ local }}</span>
         </nav>
       </div>
     </header>
@@ -29,7 +31,7 @@
     <div class="swiper-wrapper">
       <div
         class="swiper-slide"
-        v-for="(items, key) in state.swiperList"
+        v-for="(items, key) in swiperList"
         :key="key"
       >
         <div class="swiper-BgMap">
@@ -43,35 +45,106 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, reactive } from "vue";
-
+import { computed, defineComponent, onMounted, reactive,ref,toRefs } from "vue";
+import { useStore } from 'vuex';
+import { useI18n } from "vue-i18n";
 import SwiperCore, { Pagination, Navigation, Autoplay } from "swiper";
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 import "swiper/swiper.scss";
 import "swiper/components/pagination/pagination.scss";
 import "swiper/components/navigation/navigation.scss";
+import { setItem } from '../../utils/storage/storage';
 
 export default defineComponent({
+  name:'',
+  components:{},
   setup(prop, context) {
-    // reactive()函数接收一个普通对象，返回一个响应式的数据对象。类似于vue2的state方法
+    const store = useStore();
+    const i18n = useI18n();
+    // 在vue3中有两种构建响应式对象的方法：reactive和ref
+    // reactive()函数接收一个普通对象，返回一个响应式的数据对象。
+    // 在使用之前需要导入 const msg = ref(999);
+    // import { reactive,ref } from 'vue'
+    // return {} 要return 出去
     const state = reactive({
-      nav_dynamic: 0,
+      local: i18n.locale.value == 'cn' ? '英文' : '中文',
+      is_open: -1,
       navList: [
         {
           id: 0,
-          name: "index",
+          title: 'home',
           href: "/index.html",
+          children:[
+            {
+              label: '首页11',
+              link: "/index.html",
+            },
+            {
+              label: '首页12',
+              link: "/index.html",
+            }
+          ]
         },
         {
           id: 1,
-          name: "about",
+          title:'services',
           href: "/about.html",
+          children:[
+            {
+              label: '服务1',
+              link: "/index.html",
+            },
+            {
+              label: '服务2s服务1',
+              link: "https://www.baidu.com",
+            }
+          ]
         },
         {
           id: 2,
-          name: "home",
+          title: 'caseShows',
           href: "/home.html",
+          children:[
+            {
+              label: '服务1',
+              link: "/index.html",
+            },
+            {
+              label: '服务2s',
+              link: "https://www.baidu.com",
+            }
+          ]
         },
+        {
+          id: 3,
+          title: 'solution',
+          href: "/home.html",
+          children:[
+            {
+              label: '服务1服务1服务1',
+              link: "/index.html",
+            },
+            {
+              label: '服务2s',
+              link: "https://www.baidu.com",
+            }
+          ]
+        },
+        {
+          id: 4,
+          title: 'contactUs',
+          href: "/home.html",
+          children:[
+            {
+              label: '服务1服务1服务1',
+              link: "/index.html",
+            },
+            {
+              label: '服务2s',
+              link: "https://www.baidu.com",
+            }
+          ]
+        }
       ],
       swiperList: [
         {
@@ -92,9 +165,18 @@ export default defineComponent({
       ],
     });
 
+    const deviceComputed = computed({
+      get:() => {
+       return store.state.device;
+      },
+      set:(val:any) => {
+       
+      },
+    });
     onMounted(() => {
       createSwiper();
     });
+
     const createSwiper = () => {
       new SwiperCore(".swiper-container", {
         loop: true,
@@ -109,24 +191,30 @@ export default defineComponent({
         },
       });
     };
+    const moveNav = (index: number) => {
+        state.is_open = index;
+    };
+    const leaveNav = () => {
+        state.is_open = -1;
+    };
+   
+    const switchLanguage = () => {
+      const locale = i18n.locale.value === "cn" ? "en" : "cn";
+      i18n.locale.value = locale;
+      setItem('locale',locale);
+      state.local = locale == 'cn' ? '英文' : '中文';
+    }
     //将响应式数据对象return出去供template使用
     return {
-      state,
-      navClick(index: number) {
-        state.nav_dynamic = index;
-      },
+      // 将代理对象转换为纯对象。并使用扩展操作符展开，方便使用，否则使用方式为state.???方式。转换后可以直接使用state里的对象属性
+      ...toRefs(state),
+      i18n,
+      deviceComputed,
+      moveNav,
+      leaveNav,
+      switchLanguage,
     };
   },
 });
 </script>
 <style lang="scss" src="./style.scss"></style>
-<style lang="scss">
-.swiper-container {
-  --swiper-theme-color: #e45612; /* 设置Swiper风格 */
-  --swiper-navigation-color: #00ff33; /* 单独设置按钮颜色 */
-  --swiper-navigation-size: 30px; /* 设置按钮大小 */
-}
-.active {
-  border-bottom: 6px solid #eb0180;
-}
-</style>

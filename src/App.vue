@@ -17,6 +17,6 @@ import Footer from '../src/components/footer/footer.vue';
   }
 </script>
 <style lang="scss">
-  @import '@/assets/css/index'; /* 全局通用样式 */
-  @import '@/assets/css/reset'; /* 现代CSS重置  */
+  @import '@/assets/scss/index.scss'; /* 全局通用样式 */
+  @import '@/assets/scss/reset.scss'; /* 现代CSS重置  */
 </style>
