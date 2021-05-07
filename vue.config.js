@@ -18,12 +18,5 @@ module.exports = {
     https: false,
     hotOnly: false,
     proxy: null, // 设置代理
-  },
-  css: {
-    loaderOptions: {
-      sass: {
-        // prependData: '@import "~assets/scss/index.scss";'
-      },
-    },
-  },
+  }
 };

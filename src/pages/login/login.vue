@@ -1,9 +1,12 @@
 <template>
   <div class="login">
-    <div class="login-mask"></div>
+    <div class="login-mask" v-if="device !== 'mobile'"></div>
+    <button @click="switchLanguage" style="position: absolute;right:10px;top:4px;">{{ language }}</button>
 
-    <el-form :model="ruleForms" :rules="rules" ref="ruleForm" class="form">
-      <button @click="switchLanguage" style="position: absolute;right:10px;top:4px;">{{ state.language }}</button>
+    <el-form 
+      @keyup.enter="submitForm('ruleForm')"
+      :style="device == 'mobile'?'top:50%;left:50%;transform: translate(-50%, -50%);':''"
+      :model="ruleForms" :rules="rules" ref="ruleForm" class="form">
 
       <el-form-item prop="account">
         <el-input
@@ -26,7 +29,6 @@
           type="primary"
           @click="submitForm('ruleForm')"
         >
-          <!-- 登 陆 -->
           {{ $t('login.login') }}
         </el-button>
       </el-form-item>
@@ -34,30 +36,34 @@
   </div>
 </template>
 <script>
-import { defineComponent, reactive } from "vue";
-import { LOGIN } from "@/mock/user/login";
+import { defineComponent, reactive,computed,toRefs } from "vue";
+import { LOGIN } from "../../api/user/login";
 import { useI18n } from "vue-i18n";
-import  { setItem }  from '../../utils/storage/storage';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+import { setItem }  from '../../utils/storage/storage';
 
 export default defineComponent({
   name: "login",
   setup(prop, context) {
+    const router = useRouter();
     const i18n = useI18n();
+    const store = useStore();
     const switchLanguage = () => {
       const locale = i18n.locale.value === "cn" ? "en" : "cn";
       i18n.locale.value = locale;
       setItem('locale',locale);
       state.language = locale;
     }; 
-    let state = reactive({
+    const state = reactive({
       result_valid: false,
       language:i18n.locale.value
     });
-    let ruleForms = reactive({
-      account: "admin",
-      password: "admin!@#",
+    const ruleForms = reactive({
+      account: "",
+      password: "",
     });
-    let rules = {
+    const rules = {
       account: [{ required: true, message: "请输入账号", trigger: "blur" }],
       password: [{ required: true, message: "请输入密码", trigger: "blur" }],
     };
@@ -71,13 +77,16 @@ export default defineComponent({
       });
       if (state.result_valid) {
         try {
-          let obj = {
+          const obj = {
             username: ruleForms.account,
-            userpwd: ruleForms.password,
+            password: ruleForms.password,
           };
           const result = await LOGIN(obj);
-          console.log(result, "result");
-          this.$router.push("/about");
+          if( result?.code == 1 ) {
+            const { token,tokenType } = result.data;
+            this.$store.dispatch('saveTokenAsync',tokenType + " " + token);
+            this.$router.push("/index.html");
+          }
         } catch (e) {
           console.log(e);
         } finally {
@@ -86,10 +95,16 @@ export default defineComponent({
         }
       }
     }
+    const device = computed({
+      get:() => {
+       return store.state.device;
+      },
+    });
     return {
+      device,
       i18n,
       switchLanguage,
-      state,
+      ...toRefs(state),
       ruleForms,
       rules,
       submitForm,

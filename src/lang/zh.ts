@@ -1,5 +1,5 @@
 import login from './login/zh';
-import navigation from './navigation/zh';
+import navigation from './header/zh';
 import footer from './footer/zh';
 
 export default {

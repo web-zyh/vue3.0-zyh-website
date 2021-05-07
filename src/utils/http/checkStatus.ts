@@ -1,3 +1,6 @@
+import { ElNotification } from 'element-plus';
+import { removeItem } from '../storage/storage';
+
 export function checkStatus(status:number,error:any){
     switch (status) {
         case 400: {
@@ -6,9 +9,16 @@ export function checkStatus(status:number,error:any){
         }
         case 401: {
             console.log('未授权,请重新登录')
-            // window.setTimeout(() => {
-            //    window.location.href = "/";
-            // },1000)
+            ElNotification({
+                title: '警告',
+                message: '登录超时,请重新登录',
+                type: 'warning',
+                duration:5000
+            });
+            window.setTimeout(() => {
+               window.location.href = "/";
+            },1000);
+            removeItem('token');
             break;
         }
         case 403: {

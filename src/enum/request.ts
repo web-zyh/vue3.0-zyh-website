@@ -1,7 +1,7 @@
 /**
  * @description: request method
  */
-export enum RequestEnum {
+export enum RequestType {
     GET = 'GET',
     POST = 'POST',
     PUT = 'PUT',
@@ -15,7 +15,7 @@ export enum RequestEnum {
 /**
  * @description:  contentTyp
  */
-export enum ContentTypeEnum {
+export enum ContentType {
     // json GET 请求格式
     JSON = 'application/json;charset=UTF-8',
     // form-data qs post请求格式

@@ -2,8 +2,8 @@ export default {
   nav: {
     home: 'Home',
     services: 'Our Services',
-    caseShows: 'case shows',
-    solution: 'solution',
+    caseShows: 'Case shows',
+    solution: 'Solution',
     contactUs: 'Contact us'
   }
 };

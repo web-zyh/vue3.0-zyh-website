@@ -1,7 +1,6 @@
-import  { service } from '@/utils/http/request'
-import { RequestEnum } from '@/enum/httpEnum'
+import { service } from '@/utils/http/request'
+import { RequestType } from '@/enum/request'
 import { LoginParams } from './types'
-import { userUrl } from '@/enum/Interface_url/userEnum'
 
 /**
  * 注意 :
@@ -15,14 +14,15 @@ import { userUrl } from '@/enum/Interface_url/userEnum'
     method: method,
     params:params,
  */
-
-
-export function LOGIN(params:LoginParams) {
-    return service.request({
-     	url: userUrl.LOGIN,
-      method: RequestEnum.GET,
-      params:params
-    }).then((response) => {
-       return response;
-	})
+enum UserUrl {
+   LOGIN = '/Token/GenToken'
+}
+export function LOGIN(params: LoginParams) {
+   return service.request({
+      url: UserUrl.LOGIN,
+      method: RequestType.POST,
+      data: params
+   }).then((response) => {
+      return response;
+   })
 }

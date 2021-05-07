@@ -1,7 +1,7 @@
 import Axios,{AxiosInstance} from 'axios'
 import { checkStatus } from './checkStatus'
 import { getToken } from '../auth/getToken'
-import { RequestEnum,ContentTypeEnum } from '../../enum/httpEnum'
+import { RequestType,ContentType } from '../../enum/request'
 import Qs from 'qs'
 
 // create axios
@@ -11,6 +11,7 @@ export const service:AxiosInstance = Axios.create({
   baseURL: process.env.VUE_APP_URL,
   timeout: 10000,  // 请求超时时间
   headers: {
+    // 'Content-Type': 'application/json',
       // 默认不填Content-Type，axios会自动处理格式
       // 'Content-Type': ContentTypeEnum.JSON, //get请求格式  
       // 'Content-Type': ContentTypeEnum.FORM_URLENCODED, //post请求格式

@@ -1,15 +1,13 @@
 {
-  "name": "myv",
+  "name": "my-zyh",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@storybook/cli": "^6.2.7",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "element-plus": "^1.0.1-beta.17",

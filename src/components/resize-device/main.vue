@@ -1,30 +1,59 @@
 <template>
-    <div @resize="handleResize"></div>
+  <div @resize="handleResize"></div>
 </template>
 
-<script>
-import { defineComponent, onMounted, computed } from "vue";
-import { getDevice } from "../../utils/device";
+<script lang="ts">
+import { defineComponent, onMounted } from "vue";
+import { useStore } from "vuex";
+
+/**
+ * 设备类型
+ */
+enum DEVICES {
+  /**
+   * 桌面
+   */
+  DESKTOP = "pc",
+  PC = "pc",
+  /**
+   * 平板
+   */
+  TABLET = "tablet",
+  /**
+   * 移动端/手机
+   */
+  MOBILE = "mobile",
+}
 
 export default defineComponent({
-  name: "HkResizeDevice",
-  props: {
-    
-  },
-  setup(prop,context) {
+  name: "ResizeDevice",
+  props: {},
+  setup() {
+    const store = useStore();
+
     onMounted(() => {
-      emitDevice();
+      window.onresize = () => {
+        return (() => {
+          handleResize(getDevice());
+        })();
+      };
     });
-    const handleResize = () => {
-      emitDevice();
+    const handleResize = (device: string) => {
+      store.commit("setDevice", device);
     };
-    const emitDevice = () => {
-      const device = getDevice();
-      context.emit('resize', device);
+    const getDevice = () => {
+      const tablet = "(min-width: 768px) and (max-width: 1024px)";
+      const mobile = "(max-width: 767px)";
+      if (window.matchMedia(mobile).matches) {
+        return DEVICES.MOBILE;
+      } else if (window.matchMedia(tablet).matches) {
+        return DEVICES.TABLET;
+      }
+      return DEVICES.PC;
     };
     return {
       handleResize,
-      emitDevice,
+      getDevice
     };
   },
 });
