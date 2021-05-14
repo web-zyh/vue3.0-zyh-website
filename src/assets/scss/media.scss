@@ -16,13 +16,13 @@ $--color-border: #ddd;
   * js 查看 src/utils/device.js
  **/
 //  手机
-$--device-mobile: '(max-width: 767px)';
+$--device-mobile: "(max-width: 767px)";
 // Pad
-$--device-tablet: '(min-width: 768px) and (max-width: 1024px)';
+$--device-tablet: "(min-width: 768px) and (max-width: 1024px)";
 // Pc
-$--device-pc: '(min-width: 1025px)';
+$--device-pc: "(min-width: 1025px)";
 // 手机和 Pad (有大部分样式手机和 Pad 端是一样的，因此增加此变量)
-$--device-mobile-and-tablet: '(max-width: 1024px)';
+$--device-mobile-and-tablet: "(max-width: 1024px)";
 
 // layout
 // mobile
@@ -31,4 +31,3 @@ $--container-m-padding-x: 20px;
 $--container-t-padding-x: 25px;
 // pc
 $--container-p-padding-x: 30.08px;
-

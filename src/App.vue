@@ -10,16 +10,20 @@ import { defineComponent, reactive, toRefs, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
-  components: {
-    ResizeDevice,
-  },
+  components: { ResizeDevice },
   setup() {
     const router = useRouter();
     const state = reactive({});
+    const aa = () => {
+      console.log("1111111");
+    };
+    function aau () {
+      console.log("1111111");
+    }
 
     onMounted(() => {
-      let beginTime = 0; //开始时间
-      let differTime = 0; //时间差
+      let beginTime = 0; // 开始时间
+      let differTime = 0; // 时间差
       window.onunload = function () {
         differTime = new Date().getTime() - beginTime;
         if (differTime <= 5) {
@@ -34,6 +38,7 @@ export default defineComponent({
     });
     return {
       ...toRefs(state),
+      aa,
     };
   },
 });
@@ -42,4 +47,3 @@ export default defineComponent({
 @import "@/assets/scss/index.scss"; /* 全局通用样式 */
 @import "@/assets/scss/reset.scss"; /* 现代CSS重置  */
 </style>
-

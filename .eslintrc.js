@@ -1,3 +1,4 @@
+// JS编码规范
 module.exports = {
   root: true,
   env: {
@@ -64,7 +65,7 @@ module.exports = {
     "no-useless-escape": "off", // 覆盖eslint:recommended中的规则，避免过多的不合理检查结果
     "comma-dangle": "error", // 要求对象或数组成员的最后不能添加逗号
     "space-infix-ops": ["error", { int32Hint: true }], // 中间的运算符左右要添加空格
-    "space-before-function-paren": ["error", "always"], // 方法括号前统一加空格，增加代码可读性
+    "space-before-function-paren": [2, "always"], // 方法括号前统一加空格，增加代码可读性
     "block-spacing": ["error", "always"], // 单行内间距一致，增加代码可读性
     "space-before-blocks": ["error", "always"], // 不是单独一行的{}前添加空格，增加代码可读性
     "keyword-spacing": ["error", { before: true, after: true }], // 关键字左右添加空格，增加代码可读性
@@ -155,6 +156,6 @@ module.exports = {
     "vue/v-bind-style": 1,
     "vue/v-on-style": 1,
     /* Variables*/
-    "vue/jsx-uses-vars": 1,
+    "vue/jsx-uses-vars": 1
   },
 };

@@ -8,19 +8,23 @@
   bottom: 0;
   right: 0;
   left: 0;
+
   & .footer {
     display: flex;
     justify-content: space-between;
     width: 100%;
+
     & .footer_link {
       text-align: center;
       display: flex;
       width: 100%;
       border-bottom: 1px solid #ccc;
       padding: 3.63rem 0 2.56rem 0;
-      & .footerLink_item{
+
+      & .footerLink_item {
         flex-grow: 1;
-        & h3{
+
+        & h3 {
           font-size: 1.25rem;
           font-weight: 600;
           color: #fff;
@@ -29,17 +33,18 @@
           margin: 0;
           padding: 0;
         }
-        & a{
+
+        & a {
           color: #fff;
-          font-size: .94rem;
+          font-size: 0.94rem;
           font-weight: 300;
           line-height: 1.88rem;
         }
-        & a:hover{
+
+        & a:hover {
           color: #eb0080;
         }
       }
     }
-    
   }
 }

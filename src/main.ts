@@ -10,7 +10,7 @@ import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 // 全局引入antd组件 end
 
-//路由发生变化修改页面title
+// 路由发生变化修改页面title
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = to.meta.title as string;
