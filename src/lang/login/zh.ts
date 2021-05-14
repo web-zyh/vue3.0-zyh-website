@@ -1,5 +1,5 @@
 export default {
-    login: {
-      login: '登 录'
-    }
-  };
+  login: {
+    login: "登 录",
+  },
+};

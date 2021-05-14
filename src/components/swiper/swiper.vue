@@ -17,7 +17,6 @@
   </div>
 </template>
 <script lang="ts">
-
 import { defineComponent, reactive, toRefs, onMounted } from "vue";
 import SwiperCore, { Pagination, Navigation, Autoplay } from "swiper";
 SwiperCore.use([Pagination, Navigation, Autoplay]);
@@ -47,13 +46,12 @@ export default defineComponent({
             bgMap: require("../../assets/banner/banner_03.png"),
             alt: "背景图第三张",
           },
-        ]
-      } 
+        ];
+      },
     },
   },
   setup() {
-    const state = reactive({
-    });
+    const state = reactive({});
     onMounted(() => {
       createSwiper();
     });

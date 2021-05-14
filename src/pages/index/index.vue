@@ -1,29 +1,29 @@
 <template>
-<div>
+  <div>
     <Header></Header>
-    <router-view></router-view>
+    <div class="main box-padding">
+      <router-view></router-view>
+    </div>
     <Footer></Footer>
-</div>
-
+  </div>
 </template>
 <script lang="ts">
-
 import Header from "../../components/header/header.vue";
 import Footer from "../../components/footer/footer.vue";
 import { defineComponent, reactive, toRefs, onMounted } from "vue";
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   components: {
-    Header,Footer
+    Header,
+    Footer,
   },
   setup() {
     const router = useRouter();
- 
-    const state = reactive({
-    });
+
+    const state = reactive({});
     onMounted(() => {
-      // router.push('/list.html');
+      router.push("/service.html");
     });
     return {
       ...toRefs(state),

@@ -1,13 +1,25 @@
 <template>
   <div class="login">
     <div class="login-mask" v-if="device !== 'mobile'"></div>
-    <button @click="switchLanguage" style="position: absolute;right:10px;top:4px;">{{ language }}</button>
+    <button
+      @click="switchLanguage"
+      style="position: absolute; right: 10px; top: 4px"
+    >
+      {{ language }}
+    </button>
 
-    <el-form 
+    <el-form
       @keyup.enter="submitForm('ruleForm')"
-      :style="device == 'mobile'?'top:50%;left:50%;transform: translate(-50%, -50%);':''"
-      :model="ruleForms" :rules="rules" ref="ruleForm" class="form">
-
+      :style="
+        device == 'mobile'
+          ? 'top:50%;left:50%;transform: translate(-50%, -50%);'
+          : ''
+      "
+      :model="ruleForms"
+      :rules="rules"
+      ref="ruleForm"
+      class="form"
+    >
       <el-form-item prop="account">
         <el-input
           type="text"
@@ -29,19 +41,19 @@
           type="primary"
           @click="submitForm('ruleForm')"
         >
-          {{ $t('login.login') }}
+          {{ $t("login.login") }}
         </el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 <script>
-import { defineComponent, reactive,computed,toRefs } from "vue";
+import { defineComponent, reactive, computed, toRefs } from "vue";
 import { LOGIN } from "../../api/user/login";
 import { useI18n } from "vue-i18n";
-import { useStore } from 'vuex';
-import { useRouter } from 'vue-router';
-import { setItem }  from '../../utils/storage/storage';
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import { setItem } from "../../utils/storage/storage";
 
 export default defineComponent({
   name: "login",
@@ -52,12 +64,12 @@ export default defineComponent({
     const switchLanguage = () => {
       const locale = i18n.locale.value === "cn" ? "en" : "cn";
       i18n.locale.value = locale;
-      setItem('locale',locale);
+      setItem("locale", locale);
       state.language = locale;
-    }; 
+    };
     const state = reactive({
       result_valid: false,
-      language:i18n.locale.value
+      language: i18n.locale.value,
     });
     const ruleForms = reactive({
       account: "",
@@ -82,9 +94,9 @@ export default defineComponent({
             password: ruleForms.password,
           };
           const result = await LOGIN(obj);
-          if( result?.code == 1 ) {
-            const { token,tokenType } = result.data;
-            this.$store.dispatch('saveTokenAsync',tokenType + " " + token);
+          if (result?.code == 1) {
+            const { token, tokenType } = result.data;
+            this.$store.dispatch("saveTokenAsync", tokenType + " " + token);
             this.$router.push("/index.html");
           }
         } catch (e) {
@@ -96,8 +108,8 @@ export default defineComponent({
       }
     }
     const device = computed({
-      get:() => {
-       return store.state.device;
+      get: () => {
+        return store.state.device;
       },
     });
     return {

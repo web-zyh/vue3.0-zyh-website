@@ -53,7 +53,7 @@ export default defineComponent({
     };
     return {
       handleResize,
-      getDevice
+      getDevice,
     };
   },
 });

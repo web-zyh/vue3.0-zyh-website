@@ -1,5 +1,5 @@
 export default {
-    login: {
-      login: 'Login'
-    }
-  };
+  login: {
+    login: "Login",
+  },
+};

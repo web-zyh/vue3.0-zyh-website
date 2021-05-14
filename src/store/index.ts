@@ -1,10 +1,10 @@
-import { createStore } from 'vuex'
-import { setItem, getItem } from '../utils/storage/storage'
-import { getDevice } from '../utils/device';
+import { createStore } from "vuex";
+import { setItem, getItem } from "../utils/storage/storage";
+import { getDevice } from "../utils/device";
 
 export default createStore({
   state: {
-    token: getItem('token') ? getItem('token') : '',
+    token: getItem("token") ? getItem("token") : "",
     device: getDevice(),
   },
   mutations: {
@@ -12,15 +12,14 @@ export default createStore({
       state.token = payload;
       setItem("token", payload);
     },
-    setDevice (state, payload) {
+    setDevice(state, payload) {
       state.device = payload;
-    }
+    },
   },
   actions: {
     saveTokenAsync(context, data) {
-      context.commit('saveToken', data)
+      context.commit("saveToken", data);
     },
   },
-  modules: {
-  }
-})
+  modules: {},
+});

@@ -1,15 +1,15 @@
 <template>
-    <Swiper :swiperList="swiperList"></Swiper>
+  <Swiper :swiperList="swiperList"></Swiper>
 </template>
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
 import Swiper from "../../../components/swiper/swiper.vue";
 
 export default defineComponent({
-  components: { Swiper  },
+  components: { Swiper },
   setup() {
     const state = reactive({
-      swiperList:[
+      swiperList: [
         {
           id: 0,
           bgMap: require("@/assets/banner/banner_01.png"),
@@ -25,7 +25,7 @@ export default defineComponent({
           bgMap: require("@/assets/banner/banner_03.png"),
           alt: "背景图第三张",
         },
-      ]
+      ],
     });
     return {
       ...toRefs(state),

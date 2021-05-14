@@ -1,7 +1,7 @@
-import localCN from './zh';
-import localEN from './en';
+import localCN from "./zh";
+import localEN from "./en";
 
 export default {
-    cn:localCN,
-    en:localEN
-}
+  cn: localCN,
+  en: localEN,
+};
