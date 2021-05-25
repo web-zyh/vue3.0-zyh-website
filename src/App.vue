@@ -2,24 +2,21 @@
   <div>
     <router-view></router-view>
     <ResizeDevice></ResizeDevice>
+    <OfflineDetection></OfflineDetection>
   </div>
 </template>
 <script lang="ts">
 import ResizeDevice from "../src/components/resize-device/main.vue";
+import OfflineDetection from "../src/components/offline-detection/main.vue";
+
 import { defineComponent, reactive, toRefs, onMounted } from "vue";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
-  components: { ResizeDevice },
+  components: { ResizeDevice, OfflineDetection },
   setup() {
     const router = useRouter();
     const state = reactive({});
-    const aa = () => {
-      console.log("1111111");
-    };
-    function aau () {
-      console.log("1111111");
-    }
 
     onMounted(() => {
       let beginTime = 0; // 开始时间
@@ -38,7 +35,6 @@ export default defineComponent({
     });
     return {
       ...toRefs(state),
-      aa,
     };
   },
 });

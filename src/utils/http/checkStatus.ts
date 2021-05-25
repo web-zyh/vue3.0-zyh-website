@@ -15,10 +15,10 @@ export function checkStatus(status: number, error: any): any {
         type: "warning",
         duration: 5000,
       });
+      removeItem("token");
       window.setTimeout(() => {
         window.location.href = "/";
       }, 1000);
-      removeItem("token");
       break;
     }
     case 403: {

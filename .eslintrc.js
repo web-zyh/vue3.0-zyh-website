@@ -22,7 +22,7 @@ module.exports = {
       // 这是个对象，表示你想使用的额外的语言特性
       globalReturn: true, // 允许在全局作用域下使用 return 语句
       impliedStrict: true, // 启用全局 strict mode (如果 ecmaVersion 是 5 或更高)
-      jsx: false, // 启用 JSX
+      jsx: false // 启用 JSX
     },
   },
   rules: {
@@ -156,6 +156,6 @@ module.exports = {
     "vue/v-bind-style": 1,
     "vue/v-on-style": 1,
     /* Variables*/
-    "vue/jsx-uses-vars": 1
+    "vue/jsx-uses-vars": 1,
   },
 };

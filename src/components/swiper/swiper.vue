@@ -59,10 +59,10 @@ export default defineComponent({
     const createSwiper = () => {
       new SwiperCore(".swiper-container", {
         loop: true,
-        autoplay: true, //可选选项，自动滑动
+        autoplay: true, // 可选选项，自动滑动
         pagination: {
           el: ".swiper-pagination",
-          clickable: true,
+          clickable: true
         },
         navigation: {
           nextEl: ".swiper-button-next",

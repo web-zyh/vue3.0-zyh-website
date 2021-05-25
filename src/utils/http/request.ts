@@ -30,12 +30,12 @@ export const service: AxiosInstance = Axios.create({
   ],
 });
 
-service.defaults.withCredentials = false; //跨域安全策略
+service.defaults.withCredentials = false; // 跨域安全策略
 
 /* request拦截器 */
 service.interceptors.request.use(
   (config) => {
-    //在发送请求之前做某事
+    // 在发送请求之前做某事
     const token = getToken();
     if (token) {
       config.headers.Authorization = token;
@@ -43,7 +43,7 @@ service.interceptors.request.use(
     return config;
   },
   (error) => {
-    //请求错误时做些事
+    // 请求错误时做些事
     return Promise.reject(error);
   }
 );
@@ -51,12 +51,13 @@ service.interceptors.request.use(
 /* respone拦截器 */
 service.interceptors.response.use(
   (response) => {
-    //对响应数据做些事
+    // 对响应数据做些事
     // window.console.log(response, '===>响应拦截器成功');
     return response.data;
   },
   (error) => {
-    //请求错误时做些事
+    // 服务器响应出错时
+    // 也可以在此设置直接跳转到出错页面，如error页面，404页面...
     const code: number = error.response.status;
     checkStatus(code, error);
   }

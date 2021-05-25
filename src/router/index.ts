@@ -25,9 +25,9 @@ const routes: Array<RouteRecordRaw> = [
         name: "service",
         meta: { title: "服务" },
         component: () => import("../pages/myservice/index.vue"),
-      },
-    ],
-  },
+      }
+    ]
+  }
 ];
 
 const router = createRouter({
@@ -43,13 +43,13 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (to.path !== "/") {
     if (store.state.token) {
-      //如果本地有token验证就继续
+      // 如果本地有token验证就继续
       next();
     } else {
-      //否则路由初始到登录页
+      // 否则路由初始到登录页
       ElNotification({
         title: "警告",
-        message: "非法登录,请您输入用户名及密码进行登录",
+        message: "登录失败,请您输入有效的用户名及密码进行登录",
         type: "warning",
         duration: 5000,
       });

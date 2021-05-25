@@ -28,7 +28,7 @@ export default defineComponent({
     return {
       ...toRefs(state),
     };
-  },
+  }
 });
 </script>
 <style lang="scss" src="./style.scss"></style>

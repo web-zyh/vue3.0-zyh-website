@@ -294,7 +294,7 @@ export default defineComponent({
       setItem("locale", locale);
       state.local = locale == "cn" ? "EN" : "CN";
     };
-    //将响应式数据对象return出去供template使用
+    // 将响应式数据对象return出去供template使用
     return {
       // 将代理对象转换为纯对象。并使用扩展操作符展开，方便使用，否则使用方式为state.???方式。转换后可以直接使用state里的对象属性
       ...toRefs(state),
