@@ -96,7 +96,10 @@ export default defineComponent({
           const result = await LOGIN(obj);
           if (result?.code == 1) {
             const { token, tokenType } = result.data;
-            this.$store.dispatch("saveTokenAsync", tokenType + " " + token);
+            this.$store.dispatch(
+              "user/saveTokenAsync",
+              `${tokenType} ${token}`
+            );
             this.$router.push("/index.html");
           }
         } catch (e) {

@@ -88,9 +88,9 @@ export default defineComponent({
     };
     return {
       ...toRefs(state),
-      eventHandle,
+      eventHandle
     };
-  },
+  }
 });
 </script>
 <style lang="scss" src="./style.scss"></style>
