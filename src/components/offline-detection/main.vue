@@ -1,6 +1,8 @@
 <template>
-  <div v-if="onLine"></div>
-  <div v-else></div>
+  <div v-if="!onLine" class="offline-mask">
+    <h2 class="offline-mask-title">{{ offlineTitle }}</h2>
+    <p class="offline-mask-desc">{{ offlineDesc }}</p>
+  </div>
 </template>
 <script lang="ts">
 import { ElNotification } from "element-plus";
@@ -18,7 +20,31 @@ interface State {
 export default defineComponent({
   name: "OfflineDetection",
   props: {
-    title: {
+    offlineTitle: {
+      type: String,
+      default() {
+        return "网络已断开,请检查网络连接";
+      }
+    },
+    onlineTitle: {
+      type: String,
+      default() {
+        return "网络已连接";
+      }
+    },
+    offlineDesc: {
+      type: String,
+      default() {
+        return "";
+      }
+    },
+    duration: {
+      type: Number,
+      default() {
+        return 2000;
+      }
+    },
+    test: {
       type: String,
       default() {
         return "有网";
@@ -29,9 +55,8 @@ export default defineComponent({
     const state = reactive<State>({
       onLine: navigator.onLine,
     });
-    const { title } = props as any;
+    const { test } = props as any;
 
-    // console.log(title, "title");
     onMounted(() => {
       // window.addEventListener("online", eventHandle);
       // window.addEventListener("offline", eventHandle);
@@ -48,22 +73,16 @@ export default defineComponent({
     });
     const eventHandle = (event: Event) => {
       console.log(event, "event");
+      const { offlineTitle, onlineTitle, offlineDesc, duration } = props as any;
       const { type } = event;
       if (type == "offline") {
         state.onLine = false; // 断网
-        ElNotification({
-          title: "提示",
-          message: "网络连接失败,请检查您的网络",
-          type: "info",
-          duration: 3000
-        });
       } else if (type == "online") {
         state.onLine = true; // 开网
         ElNotification({
-          title: "提示",
-          message: "网络已恢复",
+          title: onlineTitle,
           type: "success",
-          duration: 3000
+          duration,
         });
       }
     };
@@ -74,3 +93,4 @@ export default defineComponent({
   },
 });
 </script>
+<style lang="scss" src="./style.scss"></style>

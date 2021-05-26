@@ -2,7 +2,11 @@
   <div>
     <router-view></router-view>
     <ResizeDevice></ResizeDevice>
-    <OfflineDetection></OfflineDetection>
+    <OfflineDetection
+      offline-title="断网处理标题"
+      offline-desc="断网处理描述"
+      online-title="网络已连接"
+    ></OfflineDetection>
   </div>
 </template>
 <script lang="ts">
