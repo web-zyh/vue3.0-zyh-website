@@ -9,12 +9,7 @@ import { useStore } from "vuex";
 export default defineComponent({
   setup() {
     const store = useStore();
-    console.log(store.state.user, "store");
-    onMounted(() => {
-      setTimeout(() => {
-        // store.dispatch("user/setLinkAsync", "被dispatch");
-      }, 5000);
-    });
+    onMounted(() => {});
     return {
       store 
     };
