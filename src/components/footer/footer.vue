@@ -79,5 +79,4 @@ export default defineComponent({
 });
 </script>
 
-function $t(arg0: string): any { throw new Error('Function not implemented.'); }
 <style lang="scss" src="./style.scss"></style>

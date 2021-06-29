@@ -72,8 +72,8 @@ export default defineComponent({
       language: i18n.locale.value,
     });
     const ruleForms = reactive({
-      account: "",
-      password: "",
+      account: "admin",
+      password: "admin",
     });
     const rules = {
       account: [{ required: true, message: "请输入账号", trigger: "blur" }],
@@ -93,15 +93,20 @@ export default defineComponent({
             username: ruleForms.account,
             password: ruleForms.password,
           };
-          const result = await LOGIN(obj);
-          if (result?.code == 1) {
-            const { token, tokenType } = result.data;
-            this.$store.dispatch(
-              "user/saveTokenAsync",
-              `${tokenType} ${token}`
-            );
-            this.$router.push("/index.html");
-          }
+          // const result = await LOGIN(obj);
+          // if (result?.code == 1) {
+          //   const { token, tokenType } = result.data;
+          //   this.$store.dispatch(
+          //     "user/saveTokenAsync",
+          //     `${tokenType} ${token}`
+          //   );
+          //   this.$router.push("/index.html");
+          // }
+          this.$router.push("/index.html");
+          this.$store.dispatch(
+            "user/saveTokenAsync",
+            `${1} ${2}`
+          );
         } catch (e) {
           console.log(e);
         } finally {

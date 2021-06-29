@@ -39,6 +39,7 @@ export default defineComponent({
       };
     });
     const handleResize = (device: string) => {
+      console.info(device);
       store.commit("setDevice", device);
     };
     const getDevice = () => {
